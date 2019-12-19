@@ -53,6 +53,7 @@ class Person {
   }
   poop(){
     this.stomach=[];
+    
   }
   toString(){
     return `${this.name}, ${this.age}`;
@@ -137,23 +138,23 @@ class Instructor extends Lambdasian {
   constructor(attributes) {
     super(attributes)
       this.specialty= attributes.specialty,
-      this.favLanguage= attributes.favLanguage
+      this.favLanguage= attributes.favLanguage,
       this.catchPhrase= attributes.catchPhrase
      }
      demo(subject){
-       this.subject = subject;
        return `Today we are learning about ${subject}`
      }
      grade(student, subject){
-       this.subject= subject,
-       this.name= student.name
-       
-       return `${this.student} got a 100 on${this.subject}`
+       return `${student.name} got a 100 on${subject}`
+     }
+     grading(student){
+      let grade = Math.ceil(Math.random()*100);
+      student.grade -= grade    // student.grade = student.grade-grade
+      console.log(student.grade);
      }
 
-     
-
   }
+  
 
 
 
@@ -172,9 +173,33 @@ class Instructor extends Lambdasian {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian{
+   constructor(attributes){
+     super(attributes)
+    this.previousBackground = attributes.previousBackground,
+    this.className = attributes.className,
+    this.favSubjects = attributes.favSubjects,
+    this.grade = 100
+  }
+  listSubjects(){
+    return `${this.favSubjects}`
+  }
+  PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+  sprintChallenge(subject){
+   return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+  
+   graduate(){
+    if(Student.grade > 70){
+      return `You can Graduate`;
+    }else {
+      return `Go back to work, you filthy animal`;
+  };
+  }
+ }
 
-}
 
 /*
   TASK 6
@@ -189,18 +214,31 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+class ProjectManager extends Instructor {
+  constructor(attributes){
+    super(attributes)
+    this.gradClassName = attributes.gradClassName,
+    this.favInstructor = attributes.favInstructor
+  }
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel stand times!`;
+}
+debugsCode(student, subject){
+  return `${this.name} debugs${student.name}'s code on ${subject} `
+}
+
 
 }
 
 /*
   STRETCH PROBLEM (no tests!)
-    - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
+    - Extend the functionality of the Student by adding a property called grade and setting it equal to a number between 1-100.
     - Now that our students have a grade build out a method on the Instructor (this will be used by _BOTH_ instructors and PM's) that will randomly add or subtract points to a student's grade. _Math.random_ will help.
     - Add a graduate method to a student.
       + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
+
 
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
