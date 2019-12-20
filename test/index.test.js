@@ -146,7 +146,14 @@ const studentAttr = {
   className: 'WebEU 3',
   favSubjects: ['JS', 'Node', 'Redux']
 }
+
+// let myInstructor = new Instructor(instructorAttr)
+// let myStudent = new Student(studentAttr)
+// myInstructor.grading(myStudent);
+
+
 const projectManagerAttr = {
+
   name: 'Dan',
   age: 35,
   location: 'San Francisco',
